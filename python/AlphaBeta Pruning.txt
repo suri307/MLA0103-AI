@@ -1,0 +1,19 @@
+FUNCTION AlphaBeta(node, depth, alpha, beta, isMax)
+
+IF leaf node
+    RETURN value
+
+IF isMax
+    FOR each child
+        alpha = MAX(alpha, AlphaBeta(child))
+        IF beta <= alpha
+            BREAK
+    RETURN alpha
+
+ELSE
+    FOR each child
+        beta = MIN(beta, AlphaBeta(child))
+        IF beta <= alpha
+            BREAK
+    RETURN beta
+END FUNCTION

@@ -1,0 +1,13 @@
+START
+Initialize both jugs as empty
+
+WHILE goal is not reached
+    Fill either jug
+    Empty either jug
+    Pour water from one jug to another
+    Check goal state
+ENDWHILE
+
+Print solution
+
+STOP

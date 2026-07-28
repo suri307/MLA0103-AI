@@ -1,0 +1,18 @@
+START
+Create Queue
+Mark start node as visited
+Enqueue start node
+
+WHILE Queue is not empty
+    Remove front node
+    Visit node
+
+    FOR each adjacent node
+        IF not visited
+            Mark visited
+            Enqueue node
+        ENDIF
+    ENDFOR
+ENDWHILE
+
+STOP

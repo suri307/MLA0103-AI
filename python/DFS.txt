@@ -1,0 +1,11 @@
+START
+Mark start node as visited
+Visit node
+
+FOR each adjacent node
+    IF not visited
+        Apply DFS recursively
+    ENDIF
+ENDFOR
+
+STOP

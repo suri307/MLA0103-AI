@@ -1,0 +1,23 @@
+START
+Initialize OPEN list with start node
+Initialize CLOSED list as empty
+
+WHILE OPEN is not empty
+    Select node with lowest f(n)
+    Remove node from OPEN
+    Add node to CLOSED
+
+    IF node is goal
+        Print path
+        STOP
+
+    Generate successors
+    FOR each successor
+        Compute g(n), h(n), f(n)
+        IF successor not in OPEN and CLOSED
+            Add successor to OPEN
+        ENDIF
+    ENDFOR
+ENDWHILE
+
+STOP

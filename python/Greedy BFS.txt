@@ -1,0 +1,15 @@
+START
+Initialize OPEN list with start node
+
+WHILE OPEN is not empty
+    Select node with smallest heuristic value
+    Remove node from OPEN
+    Visit node
+
+    IF goal found
+        STOP
+
+    Add unvisited neighbors to OPEN
+ENDWHILE
+
+STOP

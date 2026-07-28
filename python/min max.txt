@@ -1,0 +1,11 @@
+FUNCTION Minimax(node, depth, isMax)
+
+IF leaf node
+    RETURN value
+
+IF isMax
+    RETURN maximum of child values
+ELSE
+    RETURN minimum of child values
+
+END FUNCTION

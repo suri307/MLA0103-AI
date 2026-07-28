@@ -1,0 +1,14 @@
+START
+Insert start node into Priority Queue
+
+WHILE Priority Queue is not empty
+    Remove node with minimum cost
+
+    IF goal found
+        STOP
+
+    Expand neighbors
+    Add neighbors with updated cost
+ENDWHILE
+
+STOP
