@@ -1,6 +1,3 @@
-# Constraint Satisfaction Problem (CSP)
-# Map Coloring using Backtracking
-
 def is_safe(region, color, assignment, neighbors):
     for neighbor in neighbors[region]:
         if neighbor in assignment and assignment[neighbor] == color:

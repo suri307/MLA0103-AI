@@ -1,5 +1,7 @@
 import math
 
+# Decision Tree - Problem 2
+
 # Dataset
 data = [
     [1, "true",  "hot",  "high",   "no"],
@@ -11,33 +13,36 @@ data = [
     [7, "true",  "hot",  "high",   "no"],
     [8, "true",  "hot",  "normal", "yes"],
     [9, "false", "cool", "normal", "yes"],
-    [10,"false", "cool", "high",   "yes"]
+    [10, "false", "cool", "high",  "yes"]
 ]
 
+# Feature names
 feature_names = {
     1: "A1",
     2: "A2",
     3: "A3"
 }
 
-# Entropy
+
+# Calculate Entropy
 def entropy(dataset):
     total = len(dataset)
-    labels = [row[-1] for row in dataset]
-
     counts = {}
-    for label in labels:
+
+    for row in dataset:
+        label = row[-1]
         counts[label] = counts.get(label, 0) + 1
 
-    ent = 0
+    result = 0
+
     for count in counts.values():
-        p = count / total
-        ent -= p * math.log2(p)
+        probability = count / total
+        result -= probability * math.log2(probability)
 
-    return ent
+    return result
 
 
-# Information Gain
+# Calculate Information Gain
 def information_gain(dataset, feature):
     total_entropy = entropy(dataset)
 
@@ -46,8 +51,14 @@ def information_gain(dataset, feature):
     weighted_entropy = 0
 
     for value in values:
-        subset = [row for row in dataset if row[feature] == value]
-        weighted_entropy += (len(subset) / len(dataset)) * entropy(subset)
+        subset = [
+            row for row in dataset
+            if row[feature] == value
+        ]
+
+        weighted_entropy += (
+            len(subset) / len(dataset)
+        ) * entropy(subset)
 
     return total_entropy - weighted_entropy
 
@@ -55,37 +66,50 @@ def information_gain(dataset, feature):
 # Build Decision Tree
 def build_tree(dataset, features):
 
-    labels = [row[-1] for row in dataset]
+    classes = [row[-1] for row in dataset]
 
-    if len(set(labels)) == 1:
-        return labels[0]
+    # All classes are the same
+    if len(set(classes)) == 1:
+        return classes[0]
 
-    if len(features) == 0:
-        return max(set(labels), key=labels.count)
+    # No features remaining
+    if not features:
+        return max(set(classes), key=classes.count)
 
-    best = max(features, key=lambda f: information_gain(dataset, f))
+    # Find feature with maximum Information Gain
+    best_feature = max(
+        features,
+        key=lambda f: information_gain(dataset, f)
+    )
 
-    tree = {feature_names[best]: {}}
+    tree = {
+        feature_names[best_feature]: {}
+    }
 
-    values = set(row[best] for row in dataset)
+    values = set(row[best_feature] for row in dataset)
 
-    remaining = [f for f in features if f != best]
+    remaining_features = [
+        f for f in features
+        if f != best_feature
+    ]
 
     for value in values:
-        subset = [row for row in dataset if row[best] == value]
 
-        tree[feature_names[best]][value] = build_tree(subset, remaining)
+        subset = [
+            row for row in dataset
+            if row[best_feature] == value
+        ]
+
+        tree[feature_names[best_feature]][value] = build_tree(
+            subset,
+            remaining_features
+        )
 
     return tree
 
 
+# Features: A1, A2, A3
 features = [1, 2, 3]
 
-print("Information Gain")
-for f in features:
-    print(feature_names[f], "=", round(information_gain(data, f), 4))
-
-tree = build_tree(data, features)
-
-print("\nDecision Tree")
-print(tree)
+# Build the Decision Tree
+decision_tree = build_tree(data, features)
