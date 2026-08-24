@@ -1,0 +1,6 @@
+Feature,Importance
+CreditScore,0.559514347575849
+LoanAmount,0.23166116103615111
+Income,0.20882449138799994
+EmploymentStatus,0.0
+RepaymentHistory,0.0
